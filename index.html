@@ -260,6 +260,29 @@
       .portrait {
         height: 699px;
         background: var(--panel);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .portrait::before {
+        content: "";
+        position: absolute;
+        inset: 42px;
+        border: 1px solid rgba(255, 255, 255, 0.56);
+      }
+
+      .portrait::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        width: 72%;
+        height: 74%;
+        transform: translateX(-50%);
+        background:
+          radial-gradient(circle at 50% 18%, rgba(255, 255, 255, 0.78) 0 11%, transparent 11.5%),
+          linear-gradient(180deg, transparent 0 18%, rgba(255, 255, 255, 0.36) 18% 52%, rgba(255, 255, 255, 0.18) 52% 100%);
+        border-radius: 240px 240px 0 0;
       }
 
       .about-side {
@@ -502,6 +525,16 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .plain-card::after {
+        content: "";
+        position: absolute;
+        inset: auto 0 0 0;
+        height: 34%;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.14));
       }
 
       .plain-card h3 {
@@ -548,6 +581,17 @@
         opacity: 0.5;
       }
 
+      .work-card::after {
+        content: "";
+        position: absolute;
+        right: 72px;
+        bottom: 126px;
+        width: 28%;
+        height: 26%;
+        background: rgba(255, 255, 255, 0.3);
+        filter: blur(2px);
+      }
+
       .work-card.muted {
         opacity: 0.2;
       }
@@ -564,6 +608,27 @@
 
       .work-card .cta {
         font-size: 18px;
+      }
+
+      .work-card .topline,
+      .work-card .bottomline {
+        position: relative;
+        z-index: 1;
+      }
+
+      .work-card .topline {
+        display: grid;
+        gap: 14px;
+      }
+
+      .work-card .tag {
+        font-size: 14px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .work-card .desc {
+        max-width: 20ch;
       }
 
       .center-cta {
@@ -592,12 +657,36 @@
         border-left: 1px solid rgba(0, 0, 0, 0.9);
       }
 
+      .showcase-column {
+        border-right: 1px solid rgba(0, 0, 0, 0.9);
+        display: grid;
+        grid-template-rows: auto auto;
+        min-height: 322px;
+      }
+
+      .showcase-copy {
+        padding: 18px 14px 14px;
+        display: grid;
+        gap: 20px;
+        align-content: start;
+        font-size: 12px;
+      }
+
+      .showcase-copy strong {
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      .showcase-copy p {
+        line-height: 1.5;
+        color: rgba(0, 0, 0, 0.82);
+      }
+
       .showcase-strip img {
         width: 100%;
-        height: 324px;
+        height: 140px;
         object-fit: cover;
         object-position: top;
-        border-right: 1px solid rgba(0, 0, 0, 0.9);
       }
 
       .workflow .title {
@@ -622,6 +711,15 @@
         font-size: 36px;
         font-weight: 400;
         margin-bottom: 10px;
+      }
+
+      .step small {
+        display: inline-block;
+        margin-bottom: 10px;
+        font-size: 14px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--muted);
       }
 
       .step p {
@@ -681,6 +779,17 @@
           linear-gradient(180deg, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0)),
           linear-gradient(90deg, rgba(255, 255, 255, 0.3) 0 2px, transparent 2px calc(33.33% - 1px), rgba(255, 255, 255, 0.3) calc(33.33% - 1px) calc(33.33% + 1px), transparent calc(33.33% + 1px) calc(66.66% - 1px), rgba(255, 255, 255, 0.3) calc(66.66% - 1px) calc(66.66% + 1px), transparent calc(66.66% + 1px));
         opacity: 0.55;
+      }
+
+      .template-box::after {
+        content: "";
+        position: absolute;
+        inset: 116px 42px auto 42px;
+        height: 126px;
+        border: 1px solid rgba(255, 255, 255, 0.38);
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.26), transparent),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.22) 0 34%, transparent 34% 66%, rgba(255, 255, 255, 0.22) 66% 100%);
       }
 
       .service-box h3,
@@ -896,9 +1005,16 @@
         .template-grid,
         .metrics-grid,
         .contact-line,
-        .showcase-strip,
         .workflow-steps {
           grid-template-columns: 1fr;
+        }
+
+        .showcase-strip {
+          grid-template-columns: 1fr;
+        }
+
+        .showcase-column {
+          min-height: auto;
         }
 
         .contact-cards {
@@ -1154,18 +1270,20 @@
 
             <div class="grid">
               <article class="work-card">
-                <div>
+                <div class="topline">
+                  <span class="tag">browser · security</span>
                   <h3>tge浏览器</h3>
-                  <p>重新定义安全xx</p>
+                  <p class="desc">重新定义安全浏览体验与风险提示结构</p>
                 </div>
-                <p class="cta">→ View Case Study</p>
+                <p class="cta bottomline">→ View Case Study</p>
               </article>
               <article class="work-card">
-                <div>
+                <div class="topline">
+                  <span class="tag">ai product · growth</span>
                   <h3>aixg</h3>
-                  <p>重新定义安全xx</p>
+                  <p class="desc">围绕智能助手场景重构转化叙事与界面层级</p>
                 </div>
-                <p class="cta">→ View Case Study</p>
+                <p class="cta bottomline">→ View Case Study</p>
               </article>
               <article class="work-card muted">
                 <div>
@@ -1216,11 +1334,46 @@
             <p class="title">合作&服务</p>
             <div class="showcase-panel">
               <div class="showcase-strip">
-                <img src="https://www.figma.com/api/mcp/asset/aa156733-5355-4f9a-967e-842280af9a1a" alt="网页设计" />
-                <img src="https://www.figma.com/api/mcp/asset/1492468e-0444-435e-96f9-f1fa88d9b901" alt="用户体验与界面设计" />
-                <img src="https://www.figma.com/api/mcp/asset/6481c5f1-0241-4ee2-9cc2-f8e357d7f5b0" alt="创意设计" />
-                <img src="https://www.figma.com/api/mcp/asset/3cfc9010-57cc-490a-8a33-950b3f304dff" alt="产品应用界面设计" />
-                <img src="https://www.figma.com/api/mcp/asset/84d627e5-67e5-4871-a1ed-bdb14790d133" alt="发展" />
+                <article class="showcase-column">
+                  <div class="showcase-copy">
+                    <strong>00-1</strong>
+                    <p>网页设计</p>
+                    <p>从展示结构到信息节奏，建立更清晰的品牌传达顺序。</p>
+                  </div>
+                  <img src="https://www.figma.com/api/mcp/asset/aa156733-5355-4f9a-967e-842280af9a1a" alt="网页设计" />
+                </article>
+                <article class="showcase-column">
+                  <div class="showcase-copy">
+                    <strong>00-2</strong>
+                    <p>用户体验与界面设计</p>
+                    <p>围绕业务目标梳理主路径，强化内容密度与操作清晰度。</p>
+                  </div>
+                  <img src="https://www.figma.com/api/mcp/asset/1492468e-0444-435e-96f9-f1fa88d9b901" alt="用户体验与界面设计" />
+                </article>
+                <article class="showcase-column">
+                  <div class="showcase-copy">
+                    <strong>00-3</strong>
+                    <p>创意设计</p>
+                    <p>通过更明确的视觉主轴，让内容的记忆点先于装饰出现。</p>
+                  </div>
+                  <img src="https://www.figma.com/api/mcp/asset/6481c5f1-0241-4ee2-9cc2-f8e357d7f5b0" alt="创意设计" />
+                </article>
+                <article class="showcase-column">
+                  <div class="showcase-copy">
+                    <strong>00-4</strong>
+                    <p>产品应用界面设计</p>
+                    <p>把复杂业务拆成可判断、可开发、可复用的界面系统。</p>
+                  </div>
+                  <img src="https://www.figma.com/api/mcp/asset/3cfc9010-57cc-490a-8a33-950b3f304dff" alt="产品应用界面设计" />
+                </article>
+                <article class="showcase-column">
+                  <div class="showcase-copy">
+                    <strong>00-5</strong>
+                    <p>发展</p>
+                    <p>通过持续合作把单次交付，升级为长期演进的设计资产。</p>
+                  </div>
+                  <img src="https://www.figma.com/api/mcp/asset/84d627e5-67e5-4871-a1ed-bdb14790d133" alt="发展" />
+                </article>
               </div>
             </div>
           </div>
@@ -1232,18 +1385,22 @@
             <div class="workflow-grid">
               <div class="workflow-steps">
                 <article class="step">
+                  <small>01</small>
                   <h3>沟通需求</h3>
                   <p>了解业务目标，确认核心问题。</p>
                 </article>
                 <article class="step">
+                  <small>02</small>
                   <h3>评估范围</h3>
                   <p>明确工作量、交付时间周期。</p>
                 </article>
                 <article class="step">
+                  <small>03</small>
                   <h3>方案执行</h3>
                   <p>详细说明收费标准、交付内容与项目管理细节。</p>
                 </article>
                 <article class="step">
+                  <small>04</small>
                   <h3>交付落地</h3>
                   <p>以组件化与文档化方式交付，方便团队快速协作。</p>
                 </article>
