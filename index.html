@@ -125,12 +125,18 @@
         justify-content: center;
         font-size: 24px;
         line-height: 1;
+        transition: background-color 180ms ease, color 180ms ease, transform 180ms ease;
       }
 
       .solid-btn {
         background: #000;
         color: #fff;
         border-color: #000;
+      }
+
+      .outline-btn:hover,
+      .solid-btn:hover {
+        transform: translateY(-1px);
       }
 
       .hero {
@@ -326,6 +332,16 @@
         overflow: hidden;
       }
 
+      .contact-card::after {
+        content: "";
+        position: absolute;
+        inset: auto 18px 18px auto;
+        width: 74px;
+        height: 74px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.16);
+      }
+
       .contact-card.large {
         grid-row: span 2;
         min-height: 251px;
@@ -360,6 +376,45 @@
         margin-top: 8px;
         border-radius: 14px;
         background: linear-gradient(90deg, #fe314d, #ff6077);
+      }
+
+      .contact-card .mail-top {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+        color: rgba(0, 0, 0, 0.74);
+      }
+
+      .gmail-mark {
+        width: 18px;
+        height: 12px;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        border-radius: 2px;
+        position: relative;
+        background: #fff;
+      }
+
+      .gmail-mark::before,
+      .gmail-mark::after {
+        content: "";
+        position: absolute;
+        top: 1px;
+        width: 7px;
+        height: 7px;
+        border-top: 2px solid;
+      }
+
+      .gmail-mark::before {
+        left: 1px;
+        border-left: 2px solid #ea4335;
+        transform: skewY(30deg);
+      }
+
+      .gmail-mark::after {
+        right: 1px;
+        border-right: 2px solid #4285f4;
+        transform: skewY(-30deg);
       }
 
       .contact-card.small h3 {
@@ -481,6 +536,16 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .work-card::before {
+        content: "";
+        position: absolute;
+        inset: 112px 72px 126px 72px;
+        border: 1px solid rgba(255, 255, 255, 0.48);
+        opacity: 0.5;
       }
 
       .work-card.muted {
@@ -604,6 +669,18 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .template-box::before {
+        content: "";
+        position: absolute;
+        inset: 84px 20px 126px;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0)),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.3) 0 2px, transparent 2px calc(33.33% - 1px), rgba(255, 255, 255, 0.3) calc(33.33% - 1px) calc(33.33% + 1px), transparent calc(33.33% + 1px) calc(66.66% - 1px), rgba(255, 255, 255, 0.3) calc(66.66% - 1px) calc(66.66% + 1px), transparent calc(66.66% + 1px));
+        opacity: 0.55;
       }
 
       .service-box h3,
@@ -619,6 +696,18 @@
       .template-box .scene {
         font-size: 24px;
         line-height: 1.35;
+        position: relative;
+        z-index: 1;
+      }
+
+      .service-box h3,
+      .template-box h3 {
+        position: relative;
+        z-index: 1;
+      }
+
+      .template-box .scene {
+        align-self: flex-start;
       }
 
       .services .note,
@@ -777,6 +866,14 @@
           display: none;
         }
 
+        .header-row {
+          gap: 18px;
+        }
+
+        .nav {
+          padding: 6px 0 4px;
+        }
+
         .hero-center .cn,
         .section-head .cn,
         .section-head .en,
@@ -802,6 +899,25 @@
         .showcase-strip,
         .workflow-steps {
           grid-template-columns: 1fr;
+        }
+
+        .contact-cards {
+          grid-auto-rows: minmax(118px, auto);
+        }
+
+        .contact-card.large {
+          min-height: 210px;
+        }
+
+        .work-card,
+        .template-box,
+        .service-box {
+          padding: 28px 22px;
+        }
+
+        .work-card::before,
+        .template-box::before {
+          inset: 92px 14px 118px;
         }
 
         .contact-input {
@@ -928,7 +1044,7 @@
                     </div>
                   </article>
                   <article class="contact-card small">
-                    <h3>Gmail</h3>
+                    <div class="mail-top"><span class="gmail-mark"></span><span>Gmail</span></div>
                     <div class="label">
                       <span class="dot"></span>
                       <span>ylwtj510@gmail.com</span>
@@ -1190,22 +1306,22 @@
               <article class="template-box">
                 <h3>Startup Landing</h3>
                 <p>网站主页</p>
-                <p class="scene">适用场景：</p>
+                <p class="scene">适用场景：品牌官网 / 产品发布</p>
               </article>
               <article class="template-box">
-                <h3>Startup Landing</h3>
-                <p>网站主页</p>
-                <p class="scene">适用场景：</p>
+                <h3>Portfolio Grid</h3>
+                <p>作品展示</p>
+                <p class="scene">适用场景：设计师主页 / 创意机构</p>
               </article>
               <article class="template-box">
-                <h3>Startup Landing</h3>
-                <p>网站主页</p>
-                <p class="scene">适用场景：</p>
+                <h3>Template Shop</h3>
+                <p>资源商城</p>
+                <p class="scene">适用场景：数字产品售卖 / 模板商店</p>
               </article>
               <article class="template-box">
-                <h3>Startup Landing</h3>
-                <p>网站主页</p>
-                <p class="scene">适用场景：</p>
+                <h3>Consulting Deck</h3>
+                <p>咨询说明</p>
+                <p class="scene">适用场景：设计提案 / 商务展示</p>
               </article>
             </div>
 
